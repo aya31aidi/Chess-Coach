@@ -1,0 +1,186 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/* Palette                                                             */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --bg: #0b0d14;
+  --bg-2: #11141e;
+  --panel: #151926;
+  --panel-2: #1b2031;
+  --border: rgb(255 255 255 / 0.08);
+  --border-strong: rgb(255 255 255 / 0.16);
+
+  --text: #ecedf3;
+  --text-muted: #9aa0b4;
+  --text-faint: #6b7189;
+
+  --gold: #e9b44c;
+  --gold-soft: rgb(233 180 76 / 0.16);
+  --green: #81b64c;
+  --red: #ca3431;
+
+  /* Board: cool slate squares, so the gold highlights stand out. */
+  --sq-light: #dfe3ec;
+  --sq-dark: #7d8aa8;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-good: var(--green);
+  --color-bad: var(--red);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  min-height: 100dvh;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgb(233 180 76 / 0.08), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgb(125 138 168 / 0.12), transparent 60%),
+    var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--gold-soft);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Small shared pieces                                                 */
+/* ------------------------------------------------------------------ */
+
+.card {
+  background: color-mix(in oklab, var(--panel) 92%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  height: 2.25rem;
+  padding: 0 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--border-strong);
+  background: color-mix(in oklab, var(--panel-2) 80%, white 6%);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-gold {
+  background: var(--gold);
+  border-color: transparent;
+  color: #1a1305;
+  font-weight: 600;
+}
+
+.btn-gold:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--gold) 88%, white);
+}
+
+.btn-icon {
+  width: 2.25rem;
+  padding: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* Text arriving from the AI coach fades in word by word. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.35s ease-out both;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.thinking-dot {
+  animation: pulse-dot 1.1s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

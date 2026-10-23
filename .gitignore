@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Copied from node_modules on install (scripts/copy-engine.mjs)
+public/engine/
+public/mediapipe/
+
+.env
+.env.local
+.env*.local
+.vercel
